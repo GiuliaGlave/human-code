@@ -1,0 +1,54 @@
+while complSilvia==domani
+    insert budget
+    if compra(lampada)==true 
+        bought=true
+    else if compra(penna)==true
+        bought=true
+    else compra(libro)
+        bought=true
+
+    if AmazonConfirmMail==true and bought==true
+        return true
+    else 
+        return false
+
+funzione compra(oggetto){
+    funzione check(oggetto)
+    open oggettoPage
+    press addToCarrello
+    if carrelloPaymentPage==open 
+        OrderProcedi(oggetto)
+        return true
+    else 
+        reload oggettoPage
+}
+
+funzione check(oggetto) 
+    inject oggetto into searchBar
+    press searchBar.Lens
+    while numOggetto=>itemsNumber 
+        numOggetto++ and check(oggetto):not(true)
+    
+        if itemPrezzo<=budget 
+            budgetCondition=true
+        if itemStars>4 and itemReview>=80
+            qualityCondition=true
+        if primeTomorrow==true
+            primeCondition=true
+        if budgetCondition==true and qualityCondition==true and primeCondition==true
+            return true
+        else
+            return false
+    return true
+
+funzione OrderProcedi(oggetto)
+        press payButton
+        if paymentPage open
+            insert Address
+            insert payMethod
+            if voucherAvaiable==true 
+                insert voucherCode
+            select speditionMethod==primeDomani
+            if totalOrderPrice<=budget
+                press acquistaOraButton
+
